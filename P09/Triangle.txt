@@ -1,0 +1,129 @@
+CLASS: Triangle
+
+PUBLIC CLASS CONSTANTS:
+
+CLASS FIELDS: base(real)
+              heigth(real)
+
+CONSTRUCTORS:
+Default:
+    IMPORT: none
+    EXPORT: none
+    ALGORITHM:
+        base := 0.0
+        height := 0.0
+        area := 0.0
+
+Alternate:
+    IMPORT: inBase(real), inHeight(real)
+    EXPORT: none
+    ALGORITHM:
+        IF (validateBase <-- inBase) AND (validateHeight <-- inHeight)
+            setBase <-- inBase
+            setHeight <-- inHeight
+        ELSE
+            FAIL
+        ENDIF
+
+Copy:
+    IMPORT: inTriangle(Triangle)
+    EXPORT: none
+    ALGORITHM:
+        base := inTriangle.getBase <-- none
+        height := inTriangle.getHeight <-- none
+
+SUBMODULE calcArea
+    IMPORT: none
+    EXPORT: none
+    ALGORITHM:
+        area := 0.5*base*height
+
+MUTATORS:
+SUBMODULE setBase
+    IMPORT: inBase
+    EXPORT: none
+    ALGORITHM:
+        IF (validateBase <-- inBase) THEN
+            base := inBase 
+            calcArea <-- none
+        ELSE
+            FAIL
+        ENDIF
+
+SUBMODULE setHeight
+    IMPORT: inHeight
+    EXPORT: none
+    ALGORITHM:
+        IF (validateHeight <-- inHeight) THEN
+            height := inHeight
+            calcArea <-- none
+        ELSE
+            FAIL
+        ENDIF
+
+SUBMODULE setArea
+    IMPORT: inArea
+    EXPORT: none
+    ALGORITHM:
+        area := inArea
+
+ACCESSORS:
+SUBMODULE getBase
+    IMPORT:none
+    EXPORT: base(real)
+  
+SUBMODULE getHeight
+    IMPORT: none
+    EXPORT: height(real)
+    
+SUBMODULE getArea
+    IMPORT: none
+    EXPORT: area
+
+SUBMODULE equals
+    IMPORT:inObj(Object)
+    EXPORT: isEqual(boolean)
+    ALGORITHM:
+        isEqual := false
+        IF (inObj ISA Triangle) THEN
+            inTriangle := (Convert to Triangle)inObj
+            isEqual := (base EQUALS inTraingle.getBase <-- none)
+                       (height EQUALS inTriangle.getHeight <-- none)
+        ENDIF
+
+SUBMODULE clone
+    IMPORT: none
+    EXPORT: cloneTriangleClass(Object)
+    ALGORITHM:
+        CONSTRUCT cloneRectangleClass USING ALTERNATE CONSTRUCTOR WITH
+        base, height, area
+
+SUBMODULE toString
+    IMPORT: none
+    EXPORT: str(string)
+    ALGORITHM:
+        str := "base: " + base + "height: " + height + "area: " + area
+       
+PRIVATE SUBMODULES:
+
+SUBMODULE validateBase
+    IMPORT: inBase
+    EXPORT: valid(boolean)
+    ALGORITHM: 
+        IF inBase < 0.0 THEN
+            valid := false
+        ELSE
+            valid := true
+        ENDIF
+    END validateBase
+
+SUBMODULE validateHeight
+    IMPORT: inHeight
+    EXPORT: valid(boolean)
+    ALGORITHM:
+        IF inHeight < 0.0 THEN
+            valid := false
+        ELSE
+            valid := true
+        ENDIF
+    END validateHeight 

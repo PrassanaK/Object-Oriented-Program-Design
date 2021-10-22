@@ -1,0 +1,170 @@
+1. 1) chile < 0 AND chile > 10 is an invalid boolean expression
+   2) WHILE beans < 12 DO
+          ----
+      ENDWHILE   is an infinite loop because beans stays at 0 which is less than 12
+   3) avocado could equal to 0. You can't divide anything by zero
+
+2.
+   SUBMODULE markGrade
+   IMPORT: mark(integer)
+   EXPORT: grade(character)
+   ALGORITHM:
+       realMark := mark DIV 10
+       CASE realMark 
+          10:
+              grade := 'N'
+          9:8:
+              grade := 'H'
+          7:
+              grade := 'D'
+          6: 
+              grade := 'C'
+          5:4:3:2:1:
+              grade := 'P'
+          0:
+              grade := 'F'
+          DEFAULT:
+              grade := 'N'
+       END CASE
+
+public static char markGrade(int mark)
+{ 
+    char grade;
+    int realMark = mark/10;
+    switch(realMark)
+    {  
+        case 10:
+            grade = 'N';
+            break;
+        case 9: case 8:
+            grade = 'H';
+            break;
+        case 7: 
+            grade = 'D';
+            break;
+        case 6:
+            grade = 'C';
+            break;
+        case 5: case 4: case 3: case 2: case 1:
+            grade = 'P';
+            break;
+        case 0:
+            grade = 'F';
+            break;
+        default:
+            grade = 'N'
+    }
+    return grade;
+}
+
+
+
+3.
+
+MAIN
+    
+    numberOfTerms := inputNumberTerms <-- none
+    factorialArray := calcFactorialOfN <-- numberTerms
+    outputFactArray <-- factorialArray
+END MAIN
+
+SUBMODULE inputNumberTerms
+IMPORT: none
+EXPORT: numberOfTerms(real)
+ALGORITHM:
+    INPUT numberOfTerms(real)
+    WHILE numberOfTerms < 6 OR numberOfTerms > 100 DO
+        OUTPUT "Please input a number between 6 and 100"
+        INPUT numberOfTerms
+    ENDWHILE
+END SUBMODULE
+
+SUBMODULE calcNFactorial
+IMPORT: aRealNumber(real)
+EXPORT: nfactorial
+ALGORITHM:
+    nFactorial := 1
+    FOR i = 2 TO numberOfTerms INC BY 1
+        nFactorial := nFactorial x i
+    ENDFOR
+END SUBMODULE
+
+SUBMODULE calcFactorialOfN
+IMPORT: numberTerms
+EXPORT: factorialArray(ARRAY OF reals OF SIZE numberTerms+2)
+ALGORITHM: 
+    factorialArray(ARRAY OF reals OF SIZE numberTerms+2)
+    FOR i := 0 TO (LENGTH OF factorialArray-1) INC BY 1
+        factorialArray[i] := 1.0/calcNFactorial <-- i
+    ENDFOR
+    factorialArray[LENGTH] := 1.0/calcNFactorial(numberTerms)
+END SUBMODULE
+
+SUBMODULE outputFactArray
+IMPORT:factorialArray
+EXPORT:none
+ALGOTIHM:
+    FOR i := 0 TO (LENGTH OF factorialArray) INC BY 1
+        OUTPUT factorialArray[i]
+    ENDFOR
+END SUBMODULE
+
+
+4.
+
+public static void main(String [] args)
+{
+    double numberOfTerms;
+    numberOfTerms = inputNumberTerms();
+    double [] factorialArray = calcFactorialOfN(numberOfTerms);
+    outputFactArray(factorialArray);
+}//end main
+
+public static double inputNumber()
+{
+    Scanner sc = new Scanner;
+    numberOfTerms = sc.nextDouble;
+    while (numberOfTerms < 6.0)||(numberOfTerms > 100.0)
+    {
+        System.out.println("Please input a number between 6 and 100");
+        numberOfTerms = sc.nextDouble;
+    }//end while
+    return numberOfTerms;
+}//end submodule
+   
+public static double calcNFactorial(double aRealNumber)
+{
+   double nFactorial = 1.0;
+   for (int i = 2; i <= numberOfTerms; i++)
+   {
+       nFactorial = nFactorial*i;
+   }//end for
+}//end submodule
+
+public static double [] calcFactorialOfN(double numberOfTerms)
+{
+    double [] factorialArray = new double[numberOfTerm+2];
+    for (int i = 0; i < factorialArray.length; i++)
+    {
+        factorialArray[i] = 1.0/calcNFactorial(i);
+    }
+    return factorialArray;
+}
+
+public static void outputFactArray(double [] factorialArray)
+{
+    for (int i = 0; i <= factorialArray.length; i++)
+    {
+        System.out.println(factorialArray[i]);
+    }
+}
+    
+
+
+
+
+
+
+
+
+

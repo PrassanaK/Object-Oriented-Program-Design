@@ -1,0 +1,127 @@
+CLASS: Circle
+
+PUBLIC CLASS CONSTANTS:
+
+CLASS FIELDS: diameter(integer)
+              area(real)
+
+CONSTRUCTORS: 
+Default: 
+    IMPORT: none
+    EXPORT: none
+    ALGORITHM: 
+        diameter := 0
+        area := 0.0
+
+Alternate:
+    IMPORT: inDiameter(integer)
+    EXPORT: none
+    ALGORITHM: 
+        IF (validateDiameter<--inDiameter)
+            setDiameter <-- inDiameter
+        ELSE
+            FAIL
+        ENDIF
+
+Copy:
+    IMPORT: inCircle(Circle)
+    EXPORT: none
+    ALGORITHM: 
+        diameter := inCircle.getDiameter<--none
+
+SUBMODULE calcArea
+    IMPORT: none
+    EXPORT: none
+    ALGORITHM:
+        area := PI*((convert to real)diameter)/2.0)^2
+
+MUTATORS:
+SUBMODULE setDiameter
+    IMPORT: inDiameter
+    EXPORT: none
+    ALGORITHM: 
+        IF (validateDiameter<--inDiameter) THEN
+            diameter := inDiameter
+            calcArea <-- none
+        ELSE
+            FAIL
+        ENDIF
+END setDiameter
+
+SUBMODULE setArea
+    IMPORT: inArea
+    EXPORT: none
+    ALGORITHM:
+        area := inArea
+END setArea
+
+ACCESSORS:
+SUBMODULE getDiameter
+    IMPORT: none
+    EXPORT: diameter
+
+SUBMODULE getArea
+    IMPORT: none
+    EXPORT: area 
+
+SUBMODULE equals 
+    IMPORT: inObj(Object)
+    EXPORT: isEqual(boolean)
+    ALGORITHM:
+       isEqual := false
+       IF (inObj ISA Circle) THEN 
+           inCircle := (Convert to Circle)inObj 
+           isEqual := (diameter EQUALS inCircle.getDiameter <-- none)
+                      (area EQUALS inCircle.getArea <-- none)
+       ENDIF
+
+SUBMODULE clone
+    IMPORT: none 
+    EXPORT: cloneCircleClass(Object)
+    ALGORITHM: 
+        CONSTRUCT cloneCircleClass USING ALTERNATE CONSTRUCTOR WITH 
+        diameter, area
+
+SUBMODULE toString
+    IMPORT: none
+    EXPORT: str(String)
+    ALGORITHM:
+        str := "diamater: " + diameter + "Area: " + area
+
+PRIVATE SUBMODULES
+
+SUBMODULE validateDiameter
+    IMPORT: inDiameter
+    EXPORT: valid(boolean)
+    ALGORITHM:
+        IF inDiameter < 0 THEN
+            valid := false
+        ELSE
+            valid := true
+    END validateDiameter 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

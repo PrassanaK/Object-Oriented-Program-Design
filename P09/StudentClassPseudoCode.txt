@@ -1,0 +1,99 @@
+CLASS: Student
+
+
+
+PUBLIC CLASS CONSTANTS: MAXMARK = 100.0
+                        MINMARK = 0.0
+CLASS FIELDS: name(String)
+              mark(Real)
+
+CONSTRUCTORS: 
+Default: 
+    IMPORT: none
+    EXPORT: none
+    ALGORITHM: name = "Default"
+               mark = 0.0
+
+Alternate:
+    IMPORT: inName(String), inMark(Real)
+    EXPORT: adress of new Student object
+    ALGORITHM: 
+        IF (validateMark<--inMark) THEN
+            name := inName
+            mark := inMark
+        ELSE
+            FAIL
+        ENDIF
+
+Copy:
+    IMPORT: inStudent(Student)
+    EXPORT: address of new Student object
+    ALGORITHM:
+        name := inStudent.getName<--none
+        mark := inStudent.getMark<--none
+
+MUTATORS:
+
+SUBMODULE setName
+    IMPORT: inName
+    EXPORT: none
+    ALGORITHM: 
+        name := inName
+
+SUBMODULE setMark
+    IMPORT: inMark
+    EXPORT: none
+    ALGORITHM:
+        IF(validateMark<--inMark) THEN
+            mark := inMark
+        ELSE
+            FAIL
+        ENDIF
+
+ACCESSORS:
+
+SUBMODULE getName
+    IMPORT: none
+    EXPORT: name
+
+SUBMODULE getMark
+    IMPORT: none
+    EXPORT: mark
+
+SUBMODULE equals
+    IMPORT: inName(String), inMark(real)
+    EXPORT: same(boolean)
+    ALGORITHM: 
+        same := (name EQUALS inName) AND (mark EQUALS inMark)
+
+SUBMODULE equals
+    IMPORT: inObj (Object)
+    EXPORT: same (boolean)
+        same := FALSE
+        IF (inObj ISA Student) THEN
+        inStudent := (Convert to Student) THEN
+        same := (name EQUALS inStudent.getName<--none) AND (mark EQUALS inStudent.getMark<--none)
+
+SUBMODULE clone
+    IMPORT: none
+    EXPORT: cloneStudent (Object)
+    ALGORITHM: 
+        CONSTRUCT cloneStudent USING ALTERNATE CONSTRUCTOR WITH
+        name, mark
+
+SUBMODULE toString
+    IMPORT: none
+    EXPORT: str
+    ALGORITHM: str = "Name: " + name + "Mark: " + mark
+        
+
+
+PRIVATE SUBMODULES:
+
+SUBMODULE validateMark
+    IMPORT: inMark
+    EXPORT: valid(boolean)
+    ALGOORITHM: 
+        valid := (inMark >= MINMARK) AND (inMark <=MAXMARK) 
+
+

@@ -1,0 +1,118 @@
+CLASS: Rectangle
+
+PUBLIC CLASS CONSTANTS:
+ 
+CLASS FIELDS: length(real)
+              width(real)
+              area(real)
+ 
+CONSTRUCTORS:
+Default:
+    IMPORT: none
+    EXPORT: none
+    ALGORITHM:
+        length := 0.0
+        width := 0.0
+        area := 0.0
+
+Alternate:
+    IMPORT: inLength(real), inWidth(real)
+    EXPORT: none
+    ALGORIHTM: 
+        IF (validateLength<--inLength) AND (validateWidth<--inWidth) THEN                   
+            length := inLength
+            width := inWidth
+        ELSE
+            FAIL
+        ENDIF
+
+Copy:
+    IMPORT: inRectangle
+    EXPORT: none
+    ALGORITHM:
+        length := inRectangle.getLength <-- none
+        width := inRectangle.getWidth <-- none
+ 
+SUBMODULE calcArea
+    IMPORT: none
+    EXPORT: none
+    ALGOTIHM:
+        area := length*width
+
+MUTATORS:
+SUBMODULE setLength
+    IMPORT: inLength
+    EXPORT: none
+    ALGORITHM:
+        IF (validateLength <-- inLength) THEN
+            length := inLength
+            calcArea <-- none
+        ELSE
+            FAIL
+        ENDIF
+ 
+SUBMODULE setWidth
+    IMPORT: inWidth
+    EXPORT: none
+    ALGORITHM:
+        IF (validateWidth <-- inWidth) THEN
+            width := inWidth
+            calcArea <-- none
+        ELSE
+            FAIL
+        ENDIF
+
+SUBMODULE setArea
+    IMPORT: inArea
+    EXPORT: none
+    ALGORITHM:
+        area := inArea
+
+ACCESSORS:
+SUBMODULE getLength
+    IMPORT: none
+    EXPORT: length
+
+SUBMODULE getWidth
+    IMPORT: none
+    EXPORT: width
+
+SUBMODULE getArea
+    IMPORT: none
+    EXPORT: area
+ 
+SUBMODULE equals
+    IMPORT: inObj(Object)
+    EXPORT: isEqual(boolean)
+    ALGORITHM:
+        isEqual := false
+        IF (inObj ISA Rectangle) THEN
+            inRectangle := (Convert to Rectangle) inObj
+            isEqual := (length EQUALS inRectangle.getLength <-- none)
+                       (width EQUALS inRectangle.getWidth <-- none)
+                       (area EQUALS inCircle.getArea <-- none)
+        ENDIF
+
+SUBMODULE clone
+    IMPORT: none
+    EXPORT: cloneRectangleClass(Object)
+    ALGORITHM:
+        CONSTRUCT cloneRectangleClass USING ALTERNATE CONSTRUCTOR WITH
+        length, width, area
+
+SUBMODULE toString
+    IMPORT: none
+    EXPORT: str(String)
+    ALGORITHM:
+        str := "length: " + length + "width: " + width + "area: " + area
+
+PRIVATE SUBDMODULES:
+SUBMODULE validateLength
+    IMPORT: inLength
+    EXPORT: valid(boolean)
+    ALGORITHM:
+        IF inLength < 0.0 THEN
+            valid := false
+        ELSE
+            valid := true
+        ENDIF

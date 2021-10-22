@@ -1,0 +1,32 @@
+MAIN
+    OUTPUT "Enter Circle Diameter"
+    INPUT circleDiameter(integer)
+    areaOfCircle(real) := PIx(circleDiameter(convert to real)/2.0)^2
+    circleAreaMSqrd := truncated areaOfCircle  DIV 10000;
+    circleAreaCmSqrd := truncated areaOfCircle MOD 10000;
+    circleAreaMmSqrd(round to 2 dcp) := (((areaOfCircle - truncated areaOfCircle)x100.0)x100.0)x100.0
+    OUTPUT "Area = " + circleAreaMSqrd + " m^2 " + circleAreaCmSqrd + " cm^2 " + circleAreaMmSqrd + " mm^2 "  
+    
+
+    OUTPUT "Enter Rectangle Length"
+    INPUT rectangleLength(real)
+    OUTPUT "Enter Rectangle Width"
+    INPUT rectangleWidth(real)
+    areaOfRectangle(real) := rectangleLength x rectangleWidth
+    recAreaMSqrd := truncated areaOfRectangle DIV 10000
+    recAreaCmSqrd := truncated areaOfRectangle MOD 10000
+    recAreaMmSqrd(round to2 dcp) := (((areaOfRectangle - truncated areaOfRectangle)x100.0)x100.0)100.0
+    OUTPUT "Area = " + recAreaMSqrd + " m^2 " + recAreaCmSqrd + " cm^2 " + recAreaMmSqrd + " mm^2 "
+
+    OUTPUT "Enter Triangle Base"
+    INPUT triangleBase
+    OUTPUT "Enter Triangle Height"
+    INPUT triangleHeight
+    areaOfTriangle(real) := (1/2) x triangleBase x triangleHeight
+    triAreaMSqrd := truncated areaOfTriangle DIV 10000
+    triAreaCmSqrd := truncated areaOfTriangle MOD 10000
+    triAreaMmSqrd(round to 2 dcp) := (((areaOfTrianglw - truncated areaOfTriangle)x100.0)x100.0)/100.0
+    OUTPUT "Area = " + triAreaMSqrd + " m^2 " + triAreaCmSqrd + " cm^2 " + triAreaMmSqrd + " mm^2 "
+
+END MAIN
+

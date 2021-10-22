@@ -1,0 +1,147 @@
+1.
+a)
+  14 - 181/100
+  = 14 - 1
+  = 13
+
+b)
+  "hiho, hiho" + 1.73205
+  "hiho, hiho1.73205"
+
+c)
+  (double)((181-30)%5)
+  (double)(151%5)
+  = 1.0
+
+d)
+  (int)(14.4 + 1.73205)*2 - 5/2 + 1
+    15*2+1
+    = 31
+
+e)
+  ((181 % 4 == 0) && ((1.73205>1.73205) || (14.4/10.0 > 1.9)))
+  ((false) && ((false)|| (flase)))
+  false
+
+2.
+i)
+  delta.equals("change")
+
+ii)
+  (beta % 5 == 0) && (beta % 7 == 0)
+
+iii)
+  alpha <= 8
+
+iv)
+  (gamma > 600) && ((beta >= 15) || (beta <= 56))
+
+3.
+i)
+1357/2 = 678 r=1
+678/2 = 339  r=0
+339/2 = 169  r=1
+169/2 = 84   r=1
+84/2 = 42    r=0
+42/2 = 21    r=0
+21/2 = 10    r=1
+10/2 = 5     r=0
+5/2 = 2      r=1
+2/2 = 1      r=0
+1/2 = 0      r=1
+10101001101
+
+ii)
+-1357
+=  10101001101
+   01010110010
+            +1
+   01010110011
+
+iii)
+0.59375*2=1.1875  1
+0.1875*2=0.375    0
+0.375*2=0.75      0
+0.75*2=1.5        1
+0.5*2=1           1
+
+10101001101.10011
+
+iv)
+Octal:
+ 010 011 010 101 111 001 101 111 011 111 
+ = 2325715737
+Hexadecimal
+ 0001 0011 0101 0111 1001 1011 1101 1111
+ = 13579BDF 
+
+4.
+
+MAIN
+  INPUT gallons(real)
+  wgallons(integer) := convertWholeGallons <-- gallons(real)
+  pints(integer) := convertToPints <-- gallons(real)
+  ounces(real) := convertToOunces <-- gallons(real)
+  OUTPUT wgallons + pints + ounces
+END MAIN
+
+SUBMODULE convertWholeGallons
+IMPORT: gallons(real)
+EXPORT: wgallons(integer)
+ALGORITHM:
+    wgallons := (convert to integer)gallons  
+END SUBMODULE
+
+SUBMODULE convertToPints
+IMPORT: gallons(real)
+EXPORT: pints(integer)
+ALGORITHM: 
+    fraction := gallons - truncated gallons
+    pints := (convert to integer)(fraction * 8.0)
+END SUBMODULE
+
+SUBMODULE convertToOunces
+IMPORT: gallons(real)
+EXPORT: ounces(real) 
+    fraction := gallons - truncated gallons 
+    pints := fraction * 8.0
+    ounces := (pints - truncated pints) * 20
+END SUBMODULE
+
+5.
+public static void main (String [] args)
+{
+    Scanner sc = new Scanner(System.in);
+    double gallons, ounces;
+    int pints, wgallons;
+    
+    gallons = sc.nextDouble;
+    wgallons = convertWholeGallons(gallons);
+    pints = convertToPints(gallons);
+    ounces = convertToOunces(gallons);
+    System.out.println(wgallons + pints + ounces);
+}
+
+public static int convertWholeGallons(double gallons)
+{
+    int wgallons = int gallons;
+    return wgallons;
+}
+
+public static int convertToPints(double gallons)
+{
+    double fraction = gallons - (int)gallons;
+    int pints =(int)(fraction*8.0);
+    return pints;
+}
+
+public static 
+{
+    double fraction = gallons - (int)gallons;
+    double pints = fraction*8.0;
+    double ounces = (pints - (int)pints)*20;
+}
+
+
+                 
+  

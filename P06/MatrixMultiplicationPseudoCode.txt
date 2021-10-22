@@ -1,0 +1,39 @@
+MAIN
+    fileOne := ArrayReader.getFilename<--"Enter file one"
+    fileTwo := ArrayReader.getFilename<--"Enter file two"
+
+    matrixA := ArrayReader.readArray<--fileOne
+    matrixB := ArrayReader.readArray<--fileTwo
+
+    IF matrixA OR matrixB = NULL THEN 
+        OUTPUT "Invalid input files"
+    ELSE 
+        matrixC := multiplyArrays<- matrixA, matrixB
+        printArray<--matrixC
+    ENDIF
+END MAIN 
+
+SUBMODULE multiplyArrays
+    IMPORT: matrixA, matrixB
+    EXPORT: matrixC
+    ALGORITHM:
+        matrixC(SIZE OF matrixA, SIZE OF matrixB[0])
+       
+        FOR ii:= 0 TO SIZE OF matrixA INC BY 1
+            FOR jj := 0 TO SIZE OF matrixB[0] INC BY 1
+                FOR kk := 0 TO SIZE OF matrixA[0] INC BY 1
+                    matrixC[ii][jj] = matrixC[ii][jj] + matrixA[ii][kk] x matrixB[kk][jj]
+                ENDFOR
+            ENDFOR
+        ENDFOR
+
+SUBMODULE printArray
+    IMPORT: inArray
+    EXPORT: none
+    ALGORITHM: 
+        FOR ii := 0 TO inArray INC BY 1
+            FOR jj := 0 TO inArray[ii] INC BY 1
+                OUTPUT inArray[ii][jj]
+            ENDFOR
+        ENDFOR
+         

@@ -1,0 +1,14 @@
+MAIN
+    
+    OUTPUT "Enter a number that you want to find the factorial of"
+    INPUT number
+    
+    IF number < 0
+        OUTPUT "Please enter a positive number"
+    ELSE
+        fact = 1
+        FOR i = 1 TO number(inclusive) INC BY 1
+            fact = fact x i
+        END FOR
+    OUTPUT "Factorial of " + number + " = " + fact
+END MAIN   

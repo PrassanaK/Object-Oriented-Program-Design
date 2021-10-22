@@ -1,0 +1,35 @@
+CLASS: StudentClass
+
+CLASS FIELDS: name(String)
+              mark(real)
+
+CONSTRUCTORS:
+Default:
+    IMPORT: none
+    EXPORT: none
+    ALGORITHM:
+        name := ""
+        mark := 0.0
+END Default
+
+Alternate:
+    IMPORT: inName(String), inMark(Real)
+    EXPORT: none
+    ALGORITHM:
+        IF (validateMark <-- inMarks) THEN
+            name := inName
+            mark := inMarks
+        ELSE 
+            THROW invalid arguement exception
+        ENDIF
+
+Copy:
+    IMPORT: inStudent
+    EXPORT: none
+    ALGORITHM:
+        name := inStudent.getname <-- none
+        mark := inStudent.getMark <-- none
+
+MUTATORS:
+SUBMODULE set
+

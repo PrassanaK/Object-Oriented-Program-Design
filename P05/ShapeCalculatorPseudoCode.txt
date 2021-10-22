@@ -1,0 +1,97 @@
+Main:
+   OUTPUT "Press c(Circle), r(Rectangle), t(Triangle), e(Exit)"
+   CASE c
+   c: 
+       circleCalc <-- none
+   r:
+       rectangleCalc <-- none
+   t: 
+       triangleCalc <--none 
+   e: 
+       OUTPUT "Goodbye"
+   DEFAULT:
+       OUTPUT "Please enter valid options only" 
+       
+   END CASE
+   
+END Main
+
+
+SUBMODULE circleCalc
+   IMPORT: none
+   EXPORT: none
+   ALGORITHM: circleDiameter := integerInput <-- "Circle Diameter"
+              area := calcCircleArea <-- circleDiameter
+              extractOutput <-- area
+
+
+SUBMODULE rectangleCalc
+   IMPORT: none
+   EXPORT: none
+   ALGORITHM: rectangleLength := realInput <-- "Rectangle Length"
+              rectangleWidth := realInput <-- "Rectangle Width"
+              area := calcRecArea <-- rectangleLength, retangleWidth
+              extractOutput <-- area
+
+
+SUBMODULE triangleCalc
+   IMPORT: none 
+   EXPORT: none
+   ALGORITHM: triangleBase := realInput <-- "Triangle Length"
+              triangleHeight := realInput <-- "Triangle Height"
+              area := calcTriArea <--triangleBase, triangleHeight
+              extractOutput <-- area
+
+
+SUBMODULE calcCircleArea
+
+   IMPORT: circleDiameter(integer)
+   EXPORT: circleArea(real)
+
+   ALGORITHM: circleArea := PIx(((convert to real)circleDiameter)/2.0)^2
+
+
+
+SUBMODULE calcRecArea
+
+   IMPORT: rectangleLength(real), rectangleWidth(real)
+   EXPORT: recArea(real)
+
+   ALGORITHM: recArea := rectangleLength(real)xrectangleWidth(real)
+
+
+
+SUBMODULE calcTriArea
+
+   IMPORT: triangleBase(real), triangleHeight(real)
+   EXPORT: triArea(real)
+
+   ALGORITHM: triArea := (triangleBase(real)xtriangleHeight(real))/2.0
+
+
+SUBMODULE extractOutput
+
+   IMPORT: area
+   EXPORT: none
+
+   ALGORITHM: mmSqrd := (area-truncated area)x100.0(two decimal places)
+              cmSqrd := (truncated area) MOD 10000
+              mSqrd := (truncated area) DIV 10000
+              OUTPUT "Area := " +mSqrd+ "m^2 " +cmSqrd+ "cm^2 " +mmSqrd+ "mm^2 "
+
+  
+
+SUBMODULE integerInput
+
+   IMPORT: String1 (string)
+   EXPORT: shapeInput(integer)
+   ALGORITHM: OUTPUT "Enter " + String1
+              INPUT shapeInput
+
+
+SUBMODULE realInput
+
+  IMPORT: String1 (string)
+  EXPORT: shapeInput (real)
+  ALGORITHM: OUTPUT "Enter " + String1
+             INPUT shapeInput
